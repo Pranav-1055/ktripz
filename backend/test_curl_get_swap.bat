@@ -1,0 +1,1 @@
+curl -v "https://api.olamaps.io/routing/v1/directions?origin=73.8567,18.5204&destination=72.8777,19.0760&mode=driving&alternatives=true&steps=true&overview=full&api_key=FAiv9fHfmCyfGpJVjjmVXlPYhOMzO9VfK3CcTubL" > curl_get_swap_output.txt 2>&1

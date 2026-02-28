@@ -1,0 +1,1 @@
+curl -v -X POST "https://api.olamaps.io/routing/v1/directions?api_key=FAiv9fHfmCyfGpJVjjmVXlPYhOMzO9VfK3CcTubL" -H "Content-Type: application/json" -H "Accept-Encoding: identity" -d @body.json > curl_output.txt 2>&1

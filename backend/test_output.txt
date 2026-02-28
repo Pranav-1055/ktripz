@@ -1,0 +1,100 @@
+Testing MapsService with Ola Maps...
+API Key: Present
+
+--- Testing Geocoding ---
+Geocoding Result: {
+  "coordinates": {
+    "lat": 18.5792,
+    "lng": 73.9089
+  },
+  "formattedAddress": "Chai Point, Airport, New Airport Rd, Pune International Airport Area, Lohegaon, Pune, Maharashtra, 411032, India",
+  "placeId": "ola-platform:5000177089251",
+  "addressComponents": [
+    {
+      "types": [
+        "country"
+      ],
+      "short_name": "India",
+      "long_name": "India"
+    },
+    {
+      "types": [
+        "administrative_area_level_1"
+      ],
+      "short_name": "Maharashtra",
+      "long_name": "Maharashtra"
+    },
+    {
+      "types": [
+        "administrative_area_level_2"
+      ],
+      "short_name": "Pune",
+      "long_name": "Pune"
+    },
+    {
+      "types": [
+        "administrative_area_level_3"
+      ],
+      "short_name": "Pune City",
+      "long_name": "Pune City"
+    },
+    {
+      "types": [
+        "locality"
+      ],
+      "short_name": "Pune",
+      "long_name": "Pune"
+    },
+    {
+      "types": [
+        "sublocality"
+      ],
+      "short_name": "Lohegaon",
+      "long_name": "Lohegaon"
+    },
+    {
+      "types": [
+        "neighborhood"
+      ],
+      "short_name": "Viman Nagar",
+      "long_name": "Viman Nagar"
+    },
+    {
+      "types": [
+        "sublocality_level_3"
+      ],
+      "short_name": "Terminal 1",
+      "long_name": "Terminal 1"
+    },
+    {
+      "types": [
+        "postal_code"
+      ],
+      "short_name": "411032",
+      "long_name": "411032"
+    },
+    {
+      "types": [
+        "street_address"
+      ],
+      "short_name": "Airport Road",
+      "long_name": "Airport Road"
+    }
+  ]
+}
+
+--- Testing Reverse Geocoding ---
+Test Failed: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'res' -> object with constructor 'IncomingMessage'
+    --- property 'req' closes the circle
+    at JSON.stringify (<anonymous>)
+    at Printf.template (D:\tripoo\TripO_startup\backend\src\utils\logger.js:62:17)
+    at Printf.transform (D:\tripoo\TripO_startup\backend\node_modules\logform\printf.js:11:26)
+    at Format.transform (D:\tripoo\TripO_startup\backend\node_modules\logform\combine.js:20:24)
+    at DerivedLogger._transform (D:\tripoo\TripO_startup\backend\node_modules\winston\lib\winston\logger.js:337:29)
+    at Transform._read (D:\tripoo\TripO_startup\backend\node_modules\readable-stream\lib\_stream_transform.js:166:10)
+    at Transform._write (D:\tripoo\TripO_startup\backend\node_modules\readable-stream\lib\_stream_transform.js:155:83)
+    at doWrite (D:\tripoo\TripO_startup\backend\node_modules\readable-stream\lib\_stream_writable.js:390:139)
+    at writeOrBuffer (D:\tripoo\TripO_startup\backend\node_modules\readable-stream\lib\_stream_writable.js:381:5)
+    at Writable.write (D:\tripoo\TripO_startup\backend\node_modules\readable-stream\lib\_stream_writable.js:302:11)

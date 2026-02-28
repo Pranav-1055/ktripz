@@ -1,0 +1,37 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host api.olamaps.io:443 was resolved.
+* IPv6: (none)
+* IPv4: 23.223.244.128, 23.223.244.82
+*   Trying 23.223.244.128:443...
+* schannel: disabled automatic use of client certificate
+* ALPN: curl offers http/1.1
+* ALPN: server accepted http/1.1
+* Established connection to api.olamaps.io (23.223.244.128 port 443) from 10.191.18.137 port 61273 
+* using HTTP/1.x
+> GET /routing/v1/directions?origin=73.8567,18.5204&destination=72.8777,19.0760&mode=driving&alternatives=true&steps=true&overview=full&api_key=FAiv9fHfmCyfGpJVjjmVXlPYhOMzO9VfK3CcTubL HTTP/1.1
+> Host: api.olamaps.io
+> User-Agent: curl/8.16.0
+> Accept: */*
+> 
+* Request completely sent off
+* schannel: remote party requests renegotiation
+* schannel: renegotiating SSL/TLS connection
+* schannel: SSL/TLS connection renegotiated
+* schannel: remote party requests renegotiation
+* schannel: renegotiating SSL/TLS connection
+* schannel: SSL/TLS connection renegotiated
+< HTTP/1.1 404 Not Found
+< Content-Type: text/plain; charset=utf-8
+< Content-Length: 36
+< Expires: Tue, 17 Feb 2026 08:53:33 GMT
+< Cache-Control: max-age=0, no-cache
+< Pragma: no-cache
+< Date: Tue, 17 Feb 2026 08:53:33 GMT
+< Connection: keep-alive
+< Akamai-GRN: 0.4ef4df17.1771318413.149b1ffb
+< 
+{ [36 bytes data]
+100    36  100    36    0     0    108      0 --:--:-- --:--:-- --:--:--   109
+* Connection #0 to host api.olamaps.io:443 left intact
+{"error_msg":"404 Route Not Found"}
