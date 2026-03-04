@@ -1,0 +1,78 @@
+{
+  "users": {
+    "mock-user-id": {
+      "uid": "mock-user-id",
+      "email": "mock@example.com",
+      "displayName": "Mock User",
+      "role": "transport_provider",
+      "profile": {
+        "name": "Mock User",
+        "email": "mock@example.com",
+        "phone": "",
+        "avatar": "",
+        "bio": "",
+        "dateOfBirth": null,
+        "gender": ""
+      },
+      "location": {},
+      "onboardingCompleted": false,
+      "verification": {
+        "phone": false,
+        "identity": false,
+        "drivingLicense": false,
+        "backgroundCheck": false
+      },
+      "rating": {
+        "asPassenger": {
+          "average": 0,
+          "count": 0,
+          "breakdown": {
+            "punctuality": 0,
+            "friendliness": 0,
+            "cleanliness": 0
+          }
+        },
+        "asDriver": {
+          "average": 0,
+          "count": 0,
+          "breakdown": {
+            "driving": 0,
+            "punctuality": 0,
+            "friendliness": 0,
+            "vehicleCondition": 0
+          }
+        }
+      },
+      "preferences": {
+        "smoking": false,
+        "pets": false,
+        "music": true,
+        "conversation": "depends_on_mood",
+        "autoApproveBookings": false,
+        "notifications": {
+          "email": true,
+          "sms": true,
+          "push": true
+        }
+      },
+      "stats": {
+        "totalRidesAsPassenger": 0,
+        "totalRidesAsDriver": 0,
+        "totalEarnings": 0,
+        "memberSince": "2026-02-17T06:34:17.751Z",
+        "lastActiveAt": "2026-02-17T10:24:08.570Z",
+        "completionRate": 100,
+        "responseTime": 0
+      },
+      "updatedAt": "2026-02-17T10:24:08.570Z",
+      "createdAt": "2026-02-17T06:34:17.751Z"
+    }
+  },
+  "rides": {},
+  "bookings": {},
+  "verification_tokens": {},
+  "vehicles": {},
+  "stops": {},
+  "routes": {},
+  "transport_providers": {}
+}

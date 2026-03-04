@@ -1,0 +1,14 @@
+{
+    "origin": [
+        18.5204,
+        73.8567
+    ],
+    "destination": [
+        19.0760,
+        72.8777
+    ],
+    "mode": "driving",
+    "alternatives": true,
+    "steps": true,
+    "overview": "full"
+}

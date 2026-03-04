@@ -1,0 +1,108 @@
+[2026-02-17T10:30:27.384Z] Create Ride Error: Can't determine Firebase Database URL.
+Stack: Error: Can't determine Firebase Database URL.
+    at DatabaseService.ensureUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:127:15)
+    at DatabaseService.getDatabase (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:67:28)
+    at getDatabaseInstance (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:102:22)
+    at getDatabaseWithUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:92:12)
+    at result.database (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:295:16)
+    at FirebaseNamespace.fn (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:103:40)
+    at getDatabase (D:\trip0\TripO_startup\backend\src\config\firebase.js:260:16)
+    at RideService.getDB (D:\trip0\TripO_startup\backend\src\services\rideService.js:17:17)
+    at RideService.createRideFromRoute (D:\trip0\TripO_startup\backend\src\services\rideService.js:1041:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+[2026-02-17T10:33:45.480Z] Create Ride Error: Can't determine Firebase Database URL.
+Stack: Error: Can't determine Firebase Database URL.
+    at DatabaseService.ensureUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:127:15)
+    at DatabaseService.getDatabase (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:67:28)
+    at getDatabaseInstance (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:102:22)
+    at getDatabaseWithUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:92:12)
+    at result.database (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:295:16)
+    at FirebaseNamespace.fn (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:103:40)
+    at getDatabase (D:\trip0\TripO_startup\backend\src\config\firebase.js:260:16)
+    at RideService.getDB (D:\trip0\TripO_startup\backend\src\services\rideService.js:17:17)
+    at RideService.createRideFromRoute (D:\trip0\TripO_startup\backend\src\services\rideService.js:1041:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+[2026-02-17T10:33:50.773Z] Create Ride Error: Can't determine Firebase Database URL.
+Stack: Error: Can't determine Firebase Database URL.
+    at DatabaseService.ensureUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:127:15)
+    at DatabaseService.getDatabase (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:67:28)
+    at getDatabaseInstance (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:102:22)
+    at getDatabaseWithUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:92:12)
+    at result.database (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:295:16)
+    at FirebaseNamespace.fn (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:103:40)
+    at getDatabase (D:\trip0\TripO_startup\backend\src\config\firebase.js:260:16)
+    at RideService.getDB (D:\trip0\TripO_startup\backend\src\services\rideService.js:17:17)
+    at RideService.createRideFromRoute (D:\trip0\TripO_startup\backend\src\services\rideService.js:1041:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+[2026-02-17T10:40:01.270Z] Create Ride Error: Can't determine Firebase Database URL.
+Stack: Error: Can't determine Firebase Database URL.
+    at DatabaseService.ensureUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:127:15)
+    at DatabaseService.getDatabase (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:67:28)
+    at getDatabaseInstance (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:102:22)
+    at getDatabaseWithUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:92:12)
+    at result.database (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:295:16)
+    at FirebaseNamespace.fn (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:103:40)
+    at getDatabase (D:\trip0\TripO_startup\backend\src\config\firebase.js:260:16)
+    at RideService.getDB (D:\trip0\TripO_startup\backend\src\services\rideService.js:17:17)
+    at RideService.createRideFromRoute (D:\trip0\TripO_startup\backend\src\services\rideService.js:1041:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+[2026-02-17T10:49:13.838Z] Create Ride Error: Can't determine Firebase Database URL.
+Stack: Error: Can't determine Firebase Database URL.
+    at DatabaseService.ensureUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:127:15)
+    at DatabaseService.getDatabase (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:67:28)
+    at getDatabaseInstance (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:102:22)
+    at getDatabaseWithUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:92:12)
+    at result.database (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:295:16)
+    at FirebaseNamespace.fn (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:103:40)
+    at getDatabase (D:\trip0\TripO_startup\backend\src\config\firebase.js:260:16)
+    at RideService.getDB (D:\trip0\TripO_startup\backend\src\services\rideService.js:17:17)
+    at RideService.createRideFromRoute (D:\trip0\TripO_startup\backend\src\services\rideService.js:1041:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+[2026-02-17T10:49:55.462Z] Create Ride Error: Can't determine Firebase Database URL.
+Stack: Error: Can't determine Firebase Database URL.
+    at DatabaseService.ensureUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:127:15)
+    at DatabaseService.getDatabase (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\database.js:67:28)
+    at getDatabaseInstance (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:102:22)
+    at getDatabaseWithUrl (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\database\index.js:92:12)
+    at result.database (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:295:16)
+    at FirebaseNamespace.fn (D:\trip0\TripO_startup\backend\node_modules\firebase-admin\lib\app\firebase-namespace.js:103:40)
+    at getDatabase (D:\trip0\TripO_startup\backend\src\config\firebase.js:260:16)
+    at RideService.getDB (D:\trip0\TripO_startup\backend\src\services\rideService.js:17:17)
+    at RideService.createRideFromRoute (D:\trip0\TripO_startup\backend\src\services\rideService.js:1041:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+[2026-02-17T10:53:12.608Z] Create Ride Error: newRideRef.set is not a function
+Stack: TypeError: newRideRef.set is not a function
+    at RideService.createRideFromRoute (D:\trip0\TripO_startup\backend\src\services\rideService.js:1042:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async D:\trip0\TripO_startup\backend\src\routes\rides.js:70:22
+
+[2026-02-20T17:55:26.988Z] Create Ride Error: newRideRef.set is not a function
+Stack: TypeError: newRideRef.set is not a function
+    at RideService.createRideFromRoute (D:\tripo_backups\TripO_startup\backend\src\services\rideService.js:1042:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async D:\tripo_backups\TripO_startup\backend\src\routes\rides.js:111:22
+
+[2026-02-20T18:03:39.533Z] Create Ride Error: newRideRef.set is not a function
+Stack: TypeError: newRideRef.set is not a function
+    at RideService.createRideFromRoute (D:\tripo_backups\TripO_startup\backend\src\services\rideService.js:1042:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async D:\tripo_backups\TripO_startup\backend\src\routes\rides.js:111:22
+
+[2026-02-20T19:05:44.838Z] Create Ride Error: newRideRef.set is not a function
+Stack: TypeError: newRideRef.set is not a function
+    at RideService.createRideFromRoute (D:\tripo_backups\TripO_startup\backend\src\services\rideService.js:1100:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async D:\tripo_backups\TripO_startup\backend\src\routes\rides.js:111:22
+
+[2026-02-20T19:05:56.270Z] Create Ride Error: newRideRef.set is not a function
+Stack: TypeError: newRideRef.set is not a function
+    at RideService.createRideFromRoute (D:\tripo_backups\TripO_startup\backend\src\services\rideService.js:1100:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async D:\tripo_backups\TripO_startup\backend\src\routes\rides.js:111:22
+

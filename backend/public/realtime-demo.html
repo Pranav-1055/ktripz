@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripO Real-time Demo</title>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .connected { background-color: #d4edda; color: #155724; }
+        .disconnected { background-color: #f8d7da; color: #721c24; }
+        .log {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #6c757d; cursor: not-allowed; }
+        input, select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>TripO Real-time WebSocket Demo</h1>
+    
+    <div class="container">
+        <h2>Connection Status</h2>
+        <div id="status" class="status disconnected">Disconnected</div>
+        
+        <div class="form-group">
+            <label for="token">Auth Token:</label>
+            <input type="text" id="token" placeholder="Enter Firebase ID token" style="width: 400px;">
+        </div>
+        
+        <button onclick="connect()">Connect</button>
+        <button onclick="disconnect()">Disconnect</button>
+    </div>
+
+    <div class="container">
+        <h2>Room Management</h2>
+        
+        <div class="form-group">
+            <label for="rideId">Ride ID:</label>
+            <input type="text" id="rideId" placeholder="Enter ride ID">
+            <button onclick="joinRide()">Join Ride</button>
+            <button onclick="leaveRide()">Leave Ride</button>
+        </div>
+        
+        <div class="form-group">
+            <label for="bookingId">Booking ID:</label>
+            <input type="text" id="bookingId" placeholder="Enter booking ID">
+            <button onclick="joinBooking()">Join Booking</button>
+            <button onclick="leaveBooking()">Leave Booking</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Test Events</h2>
+        
+        <div class="form-group">
+            <button onclick="shareLocation()">Share Test Location</button>
+            <button onclick="startTyping()">Start Typing</button>
+            <button onclick="stopTyping()">Stop Typing</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Event Log</h2>
+        <div id="log" class="log"></div>
+        <button onclick="clearLog()">Clear Log</button>
+    </div>
+
+    <script>
+        let socket = null;
+        
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function updateStatus(connected) {
+            const statusDiv = document.getElementById('status');
+            if (connected) {
+                statusDiv.textContent = 'Connected';
+                statusDiv.className = 'status connected';
+            } else {
+                statusDiv.textContent = 'Disconnected';
+                statusDiv.className = 'status disconnected';
+            }
+        }
+        
+        function connect() {
+            const token = document.getElementById('token').value;
+            if (!token) {
+                alert('Please enter an authentication token');
+                return;
+            }
+            
+            if (socket) {
+                socket.disconnect();
+            }
+            
+            log('Attempting to connect...');
+            
+            socket = io('http://localhost:3000', {
+                auth: {
+                    token: token
+                },
+                transports: ['websocket', 'polling']
+            });
+            
+            socket.on('connect', () => {
+                log('Connected to server');
+                updateStatus(true);
+            });
+            
+            socket.on('disconnect', (reason) => {
+                log(`Disconnected: ${reason}`);
+                updateStatus(false);
+            });
+            
+            socket.on('connect_error', (error) => {
+                log(`Connection error: ${error.message}`);
+                updateStatus(false);
+            });
+            
+            // Real-time event listeners
+            socket.on('ride_updated', (data) => {
+                log(`Ride Updated: ${JSON.stringify(data, null, 2)}`);
+            });
+            
+            socket.on('booking_status_changed', (data) => {
+                log(`Booking Status Changed: ${JSON.stringify(data, null, 2)}`);
+            });
+            
+            socket.on('trip_tracking_update', (data) => {
+                log(`Trip Tracking Update: ${JSON.stringify(data, null, 2)}`);
+            });
+            
+            socket.on('notification', (data) => {
+                log(`Notification: ${JSON.stringify(data, null, 2)}`);
+            });
+            
+            socket.on('message_received', (data) => {
+                log(`Message Received: ${JSON.stringify(data, null, 2)}`);
+            });
+            
+            socket.on('location_update', (data) => {
+                log(`Location Update: ${JSON.stringify(data, null, 2)}`);
+            });
+            
+            socket.on('user_typing', (data) => {
+                log(`User Typing: ${JSON.stringify(data, null, 2)}`);
+            });
+        }
+        
+        function disconnect() {
+            if (socket) {
+                socket.disconnect();
+                socket = null;
+                log('Disconnected from server');
+                updateStatus(false);
+            }
+        }
+        
+        function joinRide() {
+            const rideId = document.getElementById('rideId').value;
+            if (!rideId || !socket) return;
+            
+            socket.emit('join_ride', rideId);
+            log(`Joined ride room: ${rideId}`);
+        }
+        
+        function leaveRide() {
+            const rideId = document.getElementById('rideId').value;
+            if (!rideId || !socket) return;
+            
+            socket.emit('leave_ride', rideId);
+            log(`Left ride room: ${rideId}`);
+        }
+        
+        function joinBooking() {
+            const bookingId = document.getElementById('bookingId').value;
+            if (!bookingId || !socket) return;
+            
+            socket.emit('join_booking', bookingId);
+            log(`Joined booking room: ${bookingId}`);
+        }
+        
+        function leaveBooking() {
+            const bookingId = document.getElementById('bookingId').value;
+            if (!bookingId || !socket) return;
+            
+            socket.emit('leave_booking', bookingId);
+            log(`Left booking room: ${bookingId}`);
+        }
+        
+        function shareLocation() {
+            const rideId = document.getElementById('rideId').value;
+            if (!rideId || !socket) return;
+            
+            const location = {
+                lat: 40.7128 + (Math.random() - 0.5) * 0.01,
+                lng: -74.0060 + (Math.random() - 0.5) * 0.01,
+                estimatedArrival: new Date(Date.now() + 15 * 60 * 1000).toISOString()
+            };
+            
+            socket.emit('share_location', { rideId, location });
+            log(`Shared location for ride ${rideId}: ${JSON.stringify(location)}`);
+        }
+        
+        function startTyping() {
+            const bookingId = document.getElementById('bookingId').value;
+            if (!bookingId || !socket) return;
+            
+            socket.emit('typing_start', { bookingId });
+            log(`Started typing in booking ${bookingId}`);
+        }
+        
+        function stopTyping() {
+            const bookingId = document.getElementById('bookingId').value;
+            if (!bookingId || !socket) return;
+            
+            socket.emit('typing_stop', { bookingId });
+            log(`Stopped typing in booking ${bookingId}`);
+        }
+        
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+        
+        // Initialize
+        updateStatus(false);
+        log('WebSocket demo initialized. Enter your Firebase token and click Connect.');
+    </script>
+</body>
+</html>
