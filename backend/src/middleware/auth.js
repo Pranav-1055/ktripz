@@ -123,6 +123,56 @@ async function authenticateToken(req, res, next) {
 }
 
 /**
+ * Lightweight authentication for endpoints that only need decoded token data.
+ * Avoids the extra Firestore/session sync work done by authenticateToken.
+ */
+async function authenticateTokenBasic(req, res, next) {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+      return sendError(res, 401, 'MISSING_TOKEN', 'Access token is required');
+    }
+
+    const decodedToken = await verifyIdToken(token);
+
+    req.user = {
+      uid: decodedToken.uid,
+      email: decodedToken.email,
+      emailVerified: decodedToken.email_verified,
+      displayName: decodedToken.name,
+      photoURL: decodedToken.picture,
+      phoneNumber: decodedToken.phone_number,
+      role: decodedToken.role,
+      token: decodedToken,
+      hasRole: (role) => {
+        const roles = Array.isArray(decodedToken.roles) ? decodedToken.roles : [decodedToken.role].filter(Boolean);
+        return roles.includes(role);
+      },
+    };
+
+    next();
+  } catch (error) {
+    logger.error(`Basic authentication error: ${error.code} - ${error.message}`);
+
+    if (error.code === 'auth/id-token-expired') {
+      return sendError(res, 401, 'TOKEN_EXPIRED', 'Access token has expired');
+    }
+
+    if (error.code === 'auth/id-token-revoked') {
+      return sendError(res, 401, 'TOKEN_REVOKED', 'Access token has been revoked');
+    }
+
+    if (error.code === 'auth/invalid-id-token') {
+      return sendError(res, 401, 'INVALID_TOKEN', 'Invalid access token');
+    }
+
+    return sendError(res, 401, 'AUTHENTICATION_FAILED', 'Authentication failed');
+  }
+}
+
+/**
  * Optional authentication middleware with enhanced caching (doesn't fail if no token)
  */
 async function optionalAuth(req, res, next) {
@@ -230,6 +280,7 @@ function requireAdmin(req, res, next) {
 
 module.exports = {
   authenticateToken,
+  authenticateTokenBasic,
   optionalAuth,
   requireRole,
   requirePassenger,

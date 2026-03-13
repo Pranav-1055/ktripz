@@ -1,6 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { authenticateToken, optionalAuth } = require('../middleware/auth');
+const { authenticateToken, authenticateTokenBasic, optionalAuth } = require('../middleware/auth');
 const { handleValidationErrors, asyncHandler, sendResponse, sendError } = require('../middleware');
 const UserService = require('../services/userService');
 const { verifyIdToken, getAuth, getFirestore } = require('../config/firebase');
@@ -370,7 +370,7 @@ router.post('/verify-token', [
  * POST /api/auth/sync-user
  * Sync Firebase user with Firestore profile
  */
-router.post('/sync-user', authenticateToken, asyncHandler(async (req, res) => {
+router.post('/sync-user', authenticateTokenBasic, asyncHandler(async (req, res) => {
   try {
     logger.info(`[SYNC_USER] Received request for UID: ${req.user.uid}`);
     logger.info(`[SYNC_USER] Payload: ${JSON.stringify(req.body, null, 2)}`);

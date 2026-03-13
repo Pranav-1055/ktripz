@@ -13,9 +13,11 @@ async function initializeRedis() {
       return redisClient;
     }
 
-    // Skip Redis in development mode unless explicitly required
-    if (process.env.NODE_ENV === 'development' && !process.env.REDIS_REQUIRED) {
-      logger.info('Redis disabled in development mode');
+    const hasExplicitRedisConfig = Boolean(process.env.REDIS_URL || process.env.REDIS_HOST);
+
+    // Skip Redis unless it is explicitly configured or required.
+    if (!hasExplicitRedisConfig && !process.env.REDIS_REQUIRED) {
+      logger.info('Redis disabled (no REDIS_URL/REDIS_HOST configured)');
       redisClient = null;
       return null;
     }
@@ -29,10 +31,9 @@ async function initializeRedis() {
         url: process.env.REDIS_URL
       };
     } else {
-      // Local development
       redisConfig = {
         socket: {
-          host: process.env.REDIS_HOST || 'localhost',
+          host: process.env.REDIS_HOST,
           port: parseInt(process.env.REDIS_PORT) || 6379,
         },
         database: parseInt(process.env.REDIS_DB) || 0,
@@ -84,8 +85,8 @@ async function initializeRedis() {
  */
 function getRedisClient() {
   if (!redisClient) {
-    if (process.env.NODE_ENV === 'development') {
-      logger.debug('Redis not available in development mode');
+    if (process.env.NODE_ENV === 'development' || process.env.VERCEL) {
+      logger.debug('Redis not available in this runtime, continuing without cache');
       return null;
     }
     throw new Error('Redis not initialized. Call initializeRedis() first.');

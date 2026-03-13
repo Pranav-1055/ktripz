@@ -1,4 +1,4 @@
-const { getFirestore } = require('../config/firebase'); // Access existing DB
+const { initializeFirebase, getFirestore } = require('../config/firebase'); // Access existing DB
 const { generateAdminToken } = require('./middleware');
 const User = require('../models/User'); // Use existing User model to manage users
 const logger = require('../utils/logger');
@@ -295,12 +295,19 @@ const adminController = {
      */
     getStops: async (req, res) => {
         try {
+            await initializeFirebase();
             const db = getFirestore();
-            const snapshot = await db.collection('stops').orderBy('created_at', 'asc').get();
+            const snapshot = await db.collection('stops').get();
             const stops = [];
 
             snapshot.forEach(doc => {
                 stops.push({ id: doc.id, ...doc.data() });
+            });
+
+            stops.sort((a, b) => {
+                const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
+                const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
+                return aTime - bTime;
             });
 
             res.status(200).json({
@@ -323,6 +330,7 @@ const adminController = {
     deleteStop: async (req, res) => {
         try {
             const { id } = req.params;
+            await initializeFirebase();
             const db = getFirestore();
 
             await db.collection('stops').doc(id).delete();
@@ -389,6 +397,7 @@ const adminController = {
                 });
             }
 
+            await initializeFirebase();
             const db = getFirestore();
 
             const routeData = {

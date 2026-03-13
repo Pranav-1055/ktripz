@@ -25,16 +25,13 @@ export default function ProviderLogin() {
         try {
             await authService.login(formData.email, formData.password);
 
-            // Force role upgrade to transport_provider
-            try {
-                console.log('Upgrading role to transport_provider...');
-                await authService.updateRole('transport_provider');
-            } catch (upgradeError) {
-                console.error('Role upgrade failed (non-critical if already upgraded):', upgradeError);
-            }
-
             // Strictly redirect to Provider Home
             navigate('/provider-home', { replace: true });
+
+            // Role sync is helpful, but it should not block login navigation.
+            authService.updateRole('transport_provider').catch((upgradeError) => {
+                console.error('Role upgrade failed (non-critical if already upgraded):', upgradeError);
+            });
 
         } catch (err) {
             console.error(err);

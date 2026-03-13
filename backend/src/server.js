@@ -45,6 +45,9 @@ const {
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
+const isVercelRuntime = Boolean(process.env.VERCEL);
+
+app.set('io', null);
 
 function parseAllowedOrigins() {
   const envOrigins = (process.env.CORS_ORIGIN || '')
@@ -208,16 +211,17 @@ async function startServer() {
       logger.info('Redis not available, continuing without cache');
     }
 
-    // Initialize Socket.io server
-    const io = initializeSocket(server);
-    logger.info('Socket.io server initialized successfully');
+    if (!isVercelRuntime) {
+      const io = initializeSocket(server);
+      logger.info('Socket.io server initialized successfully');
 
-    // Make io available to routes
-    app.set('io', io);
+      app.set('io', io);
 
-    // Initialize notification scheduler
-    NotificationSchedulerService.initialize();
-    logger.info('Notification scheduler initialized successfully');
+      NotificationSchedulerService.initialize();
+      logger.info('Notification scheduler initialized successfully');
+    } else {
+      logger.info('Skipping Socket.io and background schedulers in Vercel runtime');
+    }
 
     // Initialize cache warmup service
     // cacheWarmupService.initialize();
@@ -229,12 +233,14 @@ async function startServer() {
     logger.info('Alerting service initialized successfully');
 
     // Setup periodic cache cleanup
-    setInterval(() => {
-      firebaseOptimizationService.cleanupInMemoryCache();
-    }, 300000); // Every 5 minutes
+    if (!isVercelRuntime) {
+      setInterval(() => {
+        firebaseOptimizationService.cleanupInMemoryCache();
+      }, 300000);
+    }
 
     // Only start server if not in test environment AND not on Vercel
-    if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+    if (process.env.NODE_ENV !== 'test' && !isVercelRuntime) {
       server.listen(PORT, () => {
         logger.info(`TripO Backend API server running on port ${PORT}`);
         logger.info(`Environment: ${process.env.NODE_ENV}`);
